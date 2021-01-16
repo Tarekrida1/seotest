@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TagsSeo } from '@shared/models/tags-seo.model';
 import { User } from '@shared/models/user.model';
+import { environment } from 'src/environments/environment';
 
 import { UserService } from './user.service';
 
@@ -27,13 +28,13 @@ export class UserComponent implements OnInit {
 
   private async get(id: string) {
     try {
-      this.service.get(id).subscribe((res) => {
-        this.user = res;
+      this.service.get(encodeURI(id)).subscribe((res) => {
+        this.user = res['data'];
 
         const seo: TagsSeo = {
-          title: `${this.user.data.first_name} ${this.user.data.last_name}`,
-          description: this.user.data.email,
-          image: this.user.data.avatar,
+          title: `${res['data']['title']} `,
+          description: res['data']['expert'],
+          image: environment.API + res['data']['featuredImage']['serving'],
           url: '',
         };
         this.service.setSeo(seo);

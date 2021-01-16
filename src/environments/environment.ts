@@ -1,5 +1,6 @@
-export const API_URL = 'https://reqres.in/api/';
+export const API_URL = 'https://api.arabiandrive.com/';
 export const environment = {
   production: false,
-  USERS_URL: `${API_URL}users`,
+API : API_URL,
+  USERS_URL: `${API_URL}articles`,
 };

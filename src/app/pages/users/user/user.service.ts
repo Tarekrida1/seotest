@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
 import { TransferHttpService } from '@gorniv/ngx-universal';
 import { TagsSeo } from '@shared/models/tags-seo.model';
-import { User } from '@shared/models/user.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -16,9 +15,13 @@ export class UserService {
     private readonly meta: Meta
   ) {}
 
-  public get(id: string): Observable<User> {
+  public get(id: string): Observable<any> {
     const path = `${environment.USERS_URL}/${id}`;
-    return this.http.get<User>(path);
+    return this.http.get<any>(path);
+  }
+  public getAll() {
+    const path = `${environment.USERS_URL}`;
+    return this.http.get<any>(path);
   }
 
   public setSeo(data: TagsSeo) {
